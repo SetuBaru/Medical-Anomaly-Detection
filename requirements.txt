@@ -6,3 +6,7 @@ pandas
 matplotlib
 scikit-learn
 seaborn
+joblib
+fastapi
+uvicorn
+python-multipart

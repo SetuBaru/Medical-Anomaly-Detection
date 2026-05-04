@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Medical Anomaly Detection</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <div>
+          <div class="kicker">Medical Anomaly Detection</div>
+          <h1 class="title">Run inference</h1>
+          <p class="subtitle">
+            Choose a model, provide input, then run a prediction.
+          </p>
+        </div>
+      </header>
+
+      <main class="card">
+        <section class="section">
+          <label class="label" for="modelSelect">Model type</label>
+          <div class="row">
+            <select id="modelSelect" class="select" aria-label="Select model type">
+              <option value="breast" selected>Breast Cancer Prediction</option>
+              <option value="brain">Brain Tumor Detection</option>
+            </select>
+            <button id="resetBtn" class="btn btn-ghost" type="button">Reset</button>
+          </div>
+          <p class="hint">
+            Breast Cancer uses a single CSV row of numeric features. Brain Tumor uses an image upload.
+          </p>
+        </section>
+
+        <section id="breastPanel" class="section">
+          <div class="sectionTitle">Breast Cancer Prediction</div>
+          <p class="hint">
+            Paste a single CSV row containing:
+            <span class="mono">id,diagnosis,mean radius,mean texture,mean perimeter,mean area,mean smoothness,mean compactness,mean concavity,mean concave points,mean symmetry,mean fractal dimension,radius error,texture error,perimeter error,area error,smoothness error,compactness error,concavity error,concave points error,symmetry error,fractal dimension error,worst radius,worst texture,worst perimeter,worst area,worst smoothness,worst compactness,worst concavity,worst concave points,worst symmetry,worst fractal dimension</span>.
+          </p>
+
+          <label class="label" for="breastCsvRow">CSV row</label>
+          <textarea
+            id="breastCsvRow"
+            class="textarea"
+            rows="6"
+            spellcheck="false"
+            placeholder="842302,M,17.99,10.38,122.8,1001,0.1184,0.2776,0.3001,0.1471,0.2419,0.07871,1.095,0.9053,8.589,153.4,0.006399,0.04904,0.05373,0.01587,0.03003,0.006193,25.38,17.33,184.6,2019,0.1622,0.6656,0.7119,0.2654,0.4601,0.1189"
+          ></textarea>
+
+          <div class="actions">
+            <button id="runBreastBtn" class="btn btn-primary" type="button">Run breast cancer prediction</button>
+          </div>
+        </section>
+
+        <section id="brainPanel" class="section hidden">
+          <div class="sectionTitle">Brain Tumor Detection</div>
+          <p class="hint">
+            Upload an image (JPG/PNG). This corresponds to <span class="mono">inference.py</span>.
+          </p>
+
+          <label class="label" for="brainImage">Tumor image</label>
+          <input id="brainImage" class="file" type="file" accept="image/*" />
+
+          <div class="actions">
+            <button id="runBrainBtn" class="btn btn-primary" type="button">Run brain tumor detection</button>
+          </div>
+        </section>
+
+        <section class="section results">
+          <div class="sectionTitle">Result</div>
+          <pre id="resultBox" class="resultBox" aria-live="polite">Waiting for input…</pre>
+          <p class="hint">
+            This frontend calls local API endpoints:
+            <span class="mono">POST /api/breast-cancer</span> and <span class="mono">POST /api/brain-tumor</span>.
+            If you want, I can add a small Python server to connect these to your existing models.
+          </p>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span class="muted">Tip: You can keep this open while training and updating models.</span>
+      </footer>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
+
